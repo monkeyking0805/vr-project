@@ -27,6 +27,10 @@
             autoRotateSpeed: 1, // Rotate 1 degree per second
             controlBar: false // Optional: hide control bar if not needed
           });
+          this.viewer.addEventListener('click', (event) => {
+            console.log('Viewer clicked', event);
+            // You can implement any logic here that should run when the viewer is clicked
+          });
       },
       loadPanoramas() {
         // Load your panoramas here
@@ -35,6 +39,8 @@
           new PANOLENS.ImagePanorama(require('@/assets/2.jpg')),
           new PANOLENS.ImagePanorama(require('@/assets/3.jpg')),
           new PANOLENS.ImagePanorama(require('@/assets/4.jpg')),
+          new PANOLENS.ImagePanorama(require('@/assets/5.jpg')),
+          new PANOLENS.ImagePanorama(require('@/assets/6.jpg')),
           // Add as many panoramas as you like
         ];
       },
@@ -45,6 +51,8 @@
           this.viewer.add(this.panoramas[1]);
           this.viewer.add(this.panoramas[2]);
           this.viewer.add(this.panoramas[3]);
+          this.viewer.add(this.panoramas[4]);
+          this.viewer.add(this.panoramas[5]);
         }
         this.addHotspots();
       },
@@ -55,16 +63,17 @@
       addHotspots() {
         // Define hotspot configurations
         const hotspotConfigs = [
-          { position: new THREE.Vector3(2500, 400, -4000), targetPanoramaIndex: 3, panoramaIndex: 0 },
-          { position: new THREE.Vector3(4000, 600, -1000), targetPanoramaIndex: 2, panoramaIndex: 0 },
-          { position: new THREE.Vector3(7000, 2500, 9000), targetPanoramaIndex: 1, panoramaIndex: 0 },
-          { position: new THREE.Vector3(4000, 400, -4000), targetPanoramaIndex: 0, panoramaIndex: 3 },
-          { position: new THREE.Vector3(6000, 800, 2000), targetPanoramaIndex: 2, panoramaIndex: 3 },
-          { position: new THREE.Vector3(5000, 1000, -500), targetPanoramaIndex: 0, panoramaIndex: 2 },
-          { position: new THREE.Vector3(3000, 400, -6000), targetPanoramaIndex: 3, panoramaIndex: 2 },
-          { position: new THREE.Vector3(6000, 400, 6000), targetPanoramaIndex: 1, panoramaIndex: 2 },
-          { position: new THREE.Vector3(2000, 0, 1500), targetPanoramaIndex: 0, panoramaIndex: 1 },
-          { position: new THREE.Vector3(3500, 200, -2000), targetPanoramaIndex: 2, panoramaIndex: 1 },
+          { position: new THREE.Vector3(6000, 400, -3000), targetPanoramaIndex: 1, panoramaIndex: 0 },
+          { position: new THREE.Vector3(3000, -400, 3000), targetPanoramaIndex: 2, panoramaIndex: 0 },
+          { position: new THREE.Vector3(2000, 0, 0), targetPanoramaIndex: 0, panoramaIndex: 1 },
+          { position: new THREE.Vector3(2000, -400, -2000), targetPanoramaIndex: 0, panoramaIndex: 2 },
+          { position: new THREE.Vector3(3000, 400, 4000), targetPanoramaIndex: 3, panoramaIndex: 2 },
+          { position: new THREE.Vector3(2000, -400, -2000), targetPanoramaIndex: 2, panoramaIndex: 3 },
+          { position: new THREE.Vector3(3000, 400, 4000), targetPanoramaIndex: 4, panoramaIndex: 3 },
+          { position: new THREE.Vector3(1000, -400, -2000), targetPanoramaIndex: 3, panoramaIndex: 4 },
+          { position: new THREE.Vector3(3000, 400, 4000), targetPanoramaIndex: 5, panoramaIndex: 4 },
+          { position: new THREE.Vector3(1000, -400, -2000), targetPanoramaIndex: 1, panoramaIndex: 5 },
+          { position: new THREE.Vector3(-1000, 100, -2000), targetPanoramaIndex: 4, panoramaIndex: 5 },
         ];
 
         // Loop through the configurations and create hotspots
@@ -91,7 +100,12 @@
     }
   };
 
-  
+//   document.addEventListener('click', (event) => {
+//     const viewerElement = document.querySelector('#container');
+//     if (viewerElement.contains(event.target)) {
+//       console.log('Clicked inside viewer');
+//     }
+// });
   </script>
   
   <style scoped>

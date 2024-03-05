@@ -23,7 +23,8 @@
       initViewer() {
         this.viewer = new PANOLENS.Viewer({ 
             container: document.querySelector('#container') ,
-            autoRotate: true,
+            autoHideInfospot: false,
+            // autoRotate: true,
             autoRotateSpeed: 1, // Rotate 1 degree per second
             controlBar: false // Optional: hide control bar if not needed
           });
@@ -41,18 +42,19 @@
           new PANOLENS.ImagePanorama(require('@/assets/4.jpg')),
           new PANOLENS.ImagePanorama(require('@/assets/5.jpg')),
           new PANOLENS.ImagePanorama(require('@/assets/6.jpg')),
+          new PANOLENS.ImagePanorama(require('@/assets/7.jpg')),
+          new PANOLENS.ImagePanorama(require('@/assets/8.jpg')),
+          new PANOLENS.ImagePanorama(require('@/assets/9.jpg')),
+          new PANOLENS.ImagePanorama(require('@/assets/10.jpg')),
           // Add as many panoramas as you like
         ];
       },
       initPanorama() {
         // Add the first panorama as the initial one
         if (this.panoramas.length > 0) {
-          this.viewer.add(this.panoramas[0]);
-          this.viewer.add(this.panoramas[1]);
-          this.viewer.add(this.panoramas[2]);
-          this.viewer.add(this.panoramas[3]);
-          this.viewer.add(this.panoramas[4]);
-          this.viewer.add(this.panoramas[5]);
+          for (let i = 0; i < this.panoramas.length; i++) {
+            this.viewer.add(this.panoramas[i]);
+          }
         }
         this.addHotspots();
       },
@@ -64,16 +66,28 @@
         // Define hotspot configurations
         const hotspotConfigs = [
           { position: new THREE.Vector3(6000, 400, -3000), targetPanoramaIndex: 1, panoramaIndex: 0 },
-          { position: new THREE.Vector3(3000, -400, 3000), targetPanoramaIndex: 2, panoramaIndex: 0 },
-          { position: new THREE.Vector3(2000, 0, 0), targetPanoramaIndex: 0, panoramaIndex: 1 },
-          { position: new THREE.Vector3(2000, -400, -2000), targetPanoramaIndex: 0, panoramaIndex: 2 },
-          { position: new THREE.Vector3(3000, 400, 4000), targetPanoramaIndex: 3, panoramaIndex: 2 },
-          { position: new THREE.Vector3(2000, -400, -2000), targetPanoramaIndex: 2, panoramaIndex: 3 },
+          { position: new THREE.Vector3(-300, 0, -4000), targetPanoramaIndex: 2, panoramaIndex: 0 },
+          { position: new THREE.Vector3(3000, -400, 3000), targetPanoramaIndex: 3, panoramaIndex: 0 },          
+          { position: new THREE.Vector3(2000, 0, 0), targetPanoramaIndex: 2, panoramaIndex: 1 },
+          { position: new THREE.Vector3(-2000, 0, 0), targetPanoramaIndex: 7, panoramaIndex: 1 },
+          { position: new THREE.Vector3(2500, 300, 0), targetPanoramaIndex: 1, panoramaIndex: 2 },
+          { position: new THREE.Vector3(2500, 700, 4000), targetPanoramaIndex: 3, panoramaIndex: 2 },
+          { position: new THREE.Vector3(2500, 300, -6000), targetPanoramaIndex: 9, panoramaIndex: 2 },
+          { position: new THREE.Vector3(2000, -400, -2000), targetPanoramaIndex: 0, panoramaIndex: 3 },
           { position: new THREE.Vector3(3000, 400, 4000), targetPanoramaIndex: 4, panoramaIndex: 3 },
-          { position: new THREE.Vector3(1000, -400, -2000), targetPanoramaIndex: 3, panoramaIndex: 4 },
+          { position: new THREE.Vector3(2000, -400, -2000), targetPanoramaIndex: 3, panoramaIndex: 4 },
           { position: new THREE.Vector3(3000, 400, 4000), targetPanoramaIndex: 5, panoramaIndex: 4 },
-          { position: new THREE.Vector3(1000, -400, -2000), targetPanoramaIndex: 1, panoramaIndex: 5 },
-          { position: new THREE.Vector3(-1000, 100, -2000), targetPanoramaIndex: 4, panoramaIndex: 5 },
+          { position: new THREE.Vector3(1000, -400, -2000), targetPanoramaIndex: 4, panoramaIndex: 5 },
+          { position: new THREE.Vector3(3000, 400, 4000), targetPanoramaIndex: 6, panoramaIndex: 5 },
+          { position: new THREE.Vector3(1000, -400, -2000), targetPanoramaIndex: 5, panoramaIndex: 6 },
+          { position: new THREE.Vector3(3000, 400, 4000), targetPanoramaIndex: 7, panoramaIndex: 6 },
+          { position: new THREE.Vector3(2000, 0, 0), targetPanoramaIndex: 1, panoramaIndex: 7 },
+          { position: new THREE.Vector3(1000, -400, -2000), targetPanoramaIndex: 6, panoramaIndex: 7 },
+          { position: new THREE.Vector3(3000, 400, 4000), targetPanoramaIndex: 8, panoramaIndex: 7 },
+          { position: new THREE.Vector3(0, -400, -2000), targetPanoramaIndex: 7, panoramaIndex: 8 },
+          { position: new THREE.Vector3(8000, -500, 2500), targetPanoramaIndex: 9, panoramaIndex: 8 },
+          { position: new THREE.Vector3(2000, 300, 1000), targetPanoramaIndex: 2, panoramaIndex: 9 },
+          { position: new THREE.Vector3(2500, 300, -3000), targetPanoramaIndex: 8, panoramaIndex: 9 },
         ];
 
         // Loop through the configurations and create hotspots
@@ -100,12 +114,6 @@
     }
   };
 
-//   document.addEventListener('click', (event) => {
-//     const viewerElement = document.querySelector('#container');
-//     if (viewerElement.contains(event.target)) {
-//       console.log('Clicked inside viewer');
-//     }
-// });
   </script>
   
   <style scoped>
